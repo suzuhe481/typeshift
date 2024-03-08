@@ -1,3 +1,5 @@
+import "./WordsList.scss";
+
 function WordsList(props) {
   const foundWords = props.foundWords;
 

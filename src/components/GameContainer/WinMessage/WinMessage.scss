@@ -1,3 +1,11 @@
+.message {
+  position: relative;
+  top: 0;
+  left: 33%;
+
+  font-size: 2rem;
+}
+
 .message.false {
   display: none;
 }

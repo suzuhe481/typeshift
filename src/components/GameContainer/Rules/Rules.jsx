@@ -1,3 +1,5 @@
+import "./Rules.scss";
+
 function Rules() {
   return (
     <div className="rules">

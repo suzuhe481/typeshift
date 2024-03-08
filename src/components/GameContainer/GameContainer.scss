@@ -1,23 +1,31 @@
 div.game-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
 
-  padding: 50px;
+/* Stylings for desktops */
+@media screen and (min-width: 600px) {
+  div.game-container {
+    display: flex;
+    flex-direction: row;
 
-  & > * {
-    border: 1px solid black;
-    height: 100vh;
-  }
+    padding: 50px;
 
-  & > .game {
-    width: 70%;
-  }
+    & > * {
+      border: 1px solid black;
+      height: 100vh;
+    }
 
-  & > .words-list {
-    width: 10%;
-  }
+    & > .game {
+      width: 70%;
+    }
 
-  & > .rules {
-    width: 20%;
+    & > .words-list {
+      width: 10%;
+    }
+
+    & > .rules {
+      width: 20%;
+    }
   }
 }

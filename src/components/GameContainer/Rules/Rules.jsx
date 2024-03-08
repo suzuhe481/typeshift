@@ -5,12 +5,10 @@ function Rules() {
       <br />
       <p>This is where the rules and instructions for playing typeshift go.</p>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        nesciunt veritatis, possimus quae qui fuga dolore quibusdam quisquam
-        excepturi nostrum, accusamus temporibus ratione minus, eligendi
-        architecto autem distinctio ut quos eius cumque voluptates eos numquam
-        vero amet! Libero odio atque error ex, recusandae, repudiandae nihil,
-        sunt deserunt ea neque praesentium!
+        In Typeshift, the goal is to find all the possible words with the given
+        letters. Click/tap the arrows to move the letters in each columns.
+        <br />
+        When all the words are found, you win.
       </p>
     </div>
   );

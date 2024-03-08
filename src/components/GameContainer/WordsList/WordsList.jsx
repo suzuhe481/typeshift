@@ -1,9 +1,15 @@
-function WordsList() {
+function WordsList(props) {
+  const foundWords = props.foundWords;
+
+  const wordsList = foundWords.map((word, index) => (
+    <li key={index}>{word}</li>
+  ));
+
   return (
     <div className="words-list">
-      <p>WordsList</p>
+      <p>Found Words</p>
       <br />
-      <p>This is where the found words will appear.</p>
+      <ul>{wordsList}</ul>
     </div>
   );
 }

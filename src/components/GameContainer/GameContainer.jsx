@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Game from "./Game/Game";
 import WordsList from "./WordsList/WordsList";
 import Rules from "./Rules/Rules";

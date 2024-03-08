@@ -7,7 +7,6 @@ import "./Column.scss";
 
 function Column(props) {
   const [letters, setLetters] = useState(props.letters);
-  // const letters = props.letters;
 
   // Moves the words in the column up.
   const moveUp = () => {
@@ -25,8 +24,8 @@ function Column(props) {
     var newWord = [...props.viewedWord];
     newWord[props.index] = letters[1];
     newWord = newWord.join("");
-    // console.log(newWord);
     props.setViewedWord(newWord);
+    props.sendViewedWord(newWord);
   };
 
   // Moves the words in the column down.
@@ -45,8 +44,8 @@ function Column(props) {
     var newWord = [...props.viewedWord];
     newWord[props.index] = letters[1];
     newWord = newWord.join("");
-    // console.log(newWord);
     props.setViewedWord(newWord);
+    props.sendViewedWord(newWord);
   };
 
   const lettersArray = Array.from(letters);

@@ -6,6 +6,7 @@ import "./Game.scss";
 
 function Game(props) {
   const letters = props.allLetters;
+  const sendViewedWord = props.sendViewedWord;
 
   const [viewedWord, setViewedWord] = useState(
     `${letters[0][1] + letters[1][1] + letters[2][1]}`
@@ -19,6 +20,7 @@ function Game(props) {
       letters={col}
       viewedWord={viewedWord}
       setViewedWord={setViewedWord}
+      sendViewedWord={sendViewedWord}
     />
   ));
 

@@ -1,0 +1,35 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  font-weight: bold;
+
+  font-size: 5rem;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+
+  .arrow {
+    cursor: pointer;
+  }
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid black;
+  margin: 2px;
+
+  width: 100px;
+  height: 100px;
+}
+
+.cell.selection {
+  border: 3px solid black;
+}

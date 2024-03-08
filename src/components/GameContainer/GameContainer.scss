@@ -1,0 +1,23 @@
+div.game-container {
+  display: flex;
+  flex-direction: row;
+
+  padding: 50px;
+
+  & > * {
+    border: 1px solid black;
+    height: 100vh;
+  }
+
+  & > .game {
+    width: 70%;
+  }
+
+  & > .words-list {
+    width: 10%;
+  }
+
+  & > .rules {
+    width: 20%;
+  }
+}

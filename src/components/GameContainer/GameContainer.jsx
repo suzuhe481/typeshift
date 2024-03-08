@@ -16,10 +16,28 @@ const allLetters = [
 const words = ["CAT", "BIG", "BAG", "BIT", "BAT"];
 
 function GameContainer() {
+  const [foundWords, setFoundWords] = useState([]);
+  const [gameWon, setGameWon] = useState(false);
+
+  function viewedWordCallback(currentWord) {
+    // If currentWord is a word in words but NOT in foundWords.
+    if (words.includes(currentWord) && !foundWords.includes(currentWord)) {
+      setFoundWords((prevState) => [...prevState, currentWord]);
+    }
+  }
+
+  // Checks for win on every change of the foundWords variable.
+  useEffect(() => {
+    if (words.length === foundWords.length) {
+      setGameWon(true);
+    }
+  }, [foundWords]);
+
   return (
     <div className="game-container">
-      <Game allLetters={allLetters} />
-      <WordsList words={words} />
+      <WinMessage gameWon={gameWon} />
+      <Game allLetters={allLetters} sendViewedWord={viewedWordCallback} />
+      <WordsList words={words} foundWords={foundWords} />
       <Rules />
     </div>
   );

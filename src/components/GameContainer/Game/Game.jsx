@@ -22,6 +22,7 @@ function Game(props) {
       viewedWord={viewedWord}
       setViewedWord={setViewedWord}
       sendViewedWord={sendViewedWord}
+      gameWon={props.gameWon}
     />
   ));
 

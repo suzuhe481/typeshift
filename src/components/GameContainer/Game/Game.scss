@@ -1,9 +1,22 @@
 .game {
-  position: relative;
-
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 25px;
+
+  &__columns {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* Stylings for desktops */
+@media screen and (min-width: 600px) {
+  .game {
+    margin: 0;
+  }
 }

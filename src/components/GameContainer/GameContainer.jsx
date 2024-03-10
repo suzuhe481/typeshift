@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Game from "./Game/Game";
 import WordsList from "./WordsList/WordsList";
 import Rules from "./Rules/Rules";
-import WinMessage from "./WinMessage/WinMessage";
 
 import "./GameContainer.scss";
 
@@ -35,8 +34,11 @@ function GameContainer() {
 
   return (
     <div className="game-container">
-      <WinMessage gameWon={gameWon} />
-      <Game allLetters={allLetters} sendViewedWord={viewedWordCallback} />
+      <Game
+        allLetters={allLetters}
+        sendViewedWord={viewedWordCallback}
+        gameWon={gameWon}
+      />
       <WordsList words={words} foundWords={foundWords} />
       <Rules />
     </div>

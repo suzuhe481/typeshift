@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Column from "./Column/Column";
+import WinMessage from "../WinMessage/WinMessage";
 
 import "./Game.scss";
 

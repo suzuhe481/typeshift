@@ -1,15 +1,17 @@
-.message {
+.game__message {
   position: relative;
   top: 0;
-  left: 33%;
+
+  text-align: center;
 
   font-size: 2rem;
-}
+  padding: 20px 0;
 
-.message.false {
-  display: none;
-}
+  &.false {
+    opacity: 0;
+  }
 
-.message.show {
-  display: block;
+  &.show {
+    opacity: 1;
+  }
 }

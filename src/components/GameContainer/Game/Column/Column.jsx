@@ -10,6 +10,11 @@ function Column(props) {
 
   // Moves the words in the column up.
   const moveUp = () => {
+    // Stops letter from moving if game is won.
+    if (props.gameWon) {
+      return;
+    }
+
     // Don't move letters if top letter is not empty.
     if (letters[0] != " ") {
       return;
@@ -30,6 +35,11 @@ function Column(props) {
 
   // Moves the words in the column down.
   const moveDown = () => {
+    // Stops letters from moving if game is won.
+    if (props.gameWon) {
+      return;
+    }
+
     // Don't move letters if bottom letter is not empty.
     if (letters[letters.length - 1] != " ") {
       return;

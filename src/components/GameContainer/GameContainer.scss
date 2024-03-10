@@ -6,29 +6,22 @@ div.game-container {
 /* Stylings for desktops */
 @media screen and (min-width: 600px) {
   div.game-container {
+    position: absolute;
     display: flex;
     flex-direction: row;
 
     padding: 50px;
-    // border: 1px solid black;
-
-    & > * {
-      height: 100vh;
-    }
 
     & > .game {
       width: 70%;
-      border: 1px solid black;
     }
 
     & > .words-list {
       width: 10%;
-      border: 1px solid black;
     }
 
     & > .rules {
       width: 20%;
-      border: 1px solid black;
     }
   }
 }

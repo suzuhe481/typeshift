@@ -26,7 +26,12 @@ function Game(props) {
     />
   ));
 
-  return <div className="game">{columnItems}</div>;
+  return (
+    <div className="game">
+      <WinMessage gameWon={props.gameWon} />
+      <div className="game__columns">{columnItems}</div>
+    </div>
+  );
 }
 
 export default Game;

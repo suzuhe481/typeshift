@@ -1,3 +1,23 @@
-.words-list {
+.words_list {
   text-align: center;
+
+  font-size: 1.4rem;
+
+  padding: 25px;
+
+  border-top: 2px solid black;
+  margin: 0 15px;
+
+  &__title {
+    text-decoration: underline;
+  }
+}
+
+/* Stylings for desktops */
+@media screen and (min-width: 600px) {
+  .words_list {
+    // Removes the border from mobile stylings first.
+    border: none;
+    border-left: 2px solid black;
+  }
 }

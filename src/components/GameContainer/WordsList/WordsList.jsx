@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
+
 import "./WordsList.scss";
 
-function WordsList(props) {
-  const foundWords = props.foundWords;
-
+function WordsList({ foundWords }) {
   const wordsList = foundWords.map((word, index) => (
     <li key={index} className="words_list__word">
       {word}
@@ -18,3 +18,7 @@ function WordsList(props) {
 }
 
 export default WordsList;
+
+WordsList.propTypes = {
+  foundWords: PropTypes.array,
+};

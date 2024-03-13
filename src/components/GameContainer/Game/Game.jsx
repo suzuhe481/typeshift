@@ -1,13 +1,13 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import Column from "./Column/Column";
 import WinMessage from "../WinMessage/WinMessage";
 
 import "./Game.scss";
 
-function Game(props) {
-  const letters = props.allLetters;
-  const sendViewedWord = props.sendViewedWord;
+function Game({ allLetters, sendViewedWord, gameWon }) {
+  const letters = allLetters;
 
   const [viewedWord, setViewedWord] = useState(
     `${letters[0][1] + letters[1][1] + letters[2][1]}`
@@ -22,16 +22,22 @@ function Game(props) {
       viewedWord={viewedWord}
       setViewedWord={setViewedWord}
       sendViewedWord={sendViewedWord}
-      gameWon={props.gameWon}
+      gameWon={gameWon}
     />
   ));
 
   return (
     <div className="game">
-      <WinMessage gameWon={props.gameWon} />
+      <WinMessage gameWon={gameWon} />
       <div className="game__columns">{columnItems}</div>
     </div>
   );
 }
 
 export default Game;
+
+Game.propTypes = {
+  allLetters: PropTypes.array,
+  sendViewedWord: PropTypes.func,
+  gameWon: PropTypes.bool,
+};

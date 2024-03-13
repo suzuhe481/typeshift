@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
+
 import "./WinMessage.scss";
 
-function WinMessage(props) {
-  const gameWon = props.gameWon;
-
+function WinMessage({ gameWon }) {
   const message = (
     <div className={`game__message ${gameWon && "show"}`}>You Win!</div>
   );
@@ -11,3 +11,7 @@ function WinMessage(props) {
 }
 
 export default WinMessage;
+
+WinMessage.propTypes = {
+  gameWon: PropTypes.bool,
+};

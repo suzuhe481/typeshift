@@ -1,17 +1,25 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import "./Column.scss";
 
-function Column(props) {
-  const [letters, setLetters] = useState(props.letters);
+function Column({
+  letters,
+  gameWon,
+  viewedWord,
+  setViewedWord,
+  sendViewedWord,
+  index,
+}) {
+  const [lettersArr, setLettersArr] = useState(letters);
 
   // Moves the words in the column up.
   const moveUp = () => {
     // Stops letter from moving if game is won.
-    if (props.gameWon) {
+    if (gameWon) {
       return;
     }
 
@@ -23,42 +31,42 @@ function Column(props) {
     // Moves the first element to the end.
     // NOTE: Slice is used because react won't rerender the page without it.
     // It doesn't see the change within the array as a change to the variable so it doesn't rerender it.
-    letters.push(letters.shift());
-    setLetters(letters.slice());
+    lettersArr.push(lettersArr.shift());
+    setLettersArr(lettersArr.slice());
 
-    var newWord = [...props.viewedWord];
-    newWord[props.index] = letters[1];
+    var newWord = [...viewedWord];
+    newWord[index] = lettersArr[1];
     newWord = newWord.join("");
-    props.setViewedWord(newWord);
-    props.sendViewedWord(newWord);
+    setViewedWord(newWord);
+    sendViewedWord(newWord);
   };
 
   // Moves the words in the column down.
   const moveDown = () => {
     // Stops letters from moving if game is won.
-    if (props.gameWon) {
+    if (gameWon) {
       return;
     }
 
     // Don't move letters if bottom letter is not empty.
-    if (letters[letters.length - 1] != " ") {
+    if (lettersArr[lettersArr.length - 1] != " ") {
       return;
     }
 
     // Moves the last element to the front.
     // NOTE: Slice is used because react won't rerender the page without it.
     // It doesn't see the change within the array as a change to the variable so it doesn't rerender it.
-    letters.unshift(letters.pop());
-    setLetters(letters.slice());
+    lettersArr.unshift(lettersArr.pop());
+    setLettersArr(lettersArr.slice());
 
-    var newWord = [...props.viewedWord];
-    newWord[props.index] = letters[1];
+    var newWord = [...viewedWord];
+    newWord[index] = lettersArr[1];
     newWord = newWord.join("");
-    props.setViewedWord(newWord);
-    props.sendViewedWord(newWord);
+    setViewedWord(newWord);
+    sendViewedWord(newWord);
   };
 
-  const lettersArray = Array.from(letters);
+  const lettersArray = Array.from(lettersArr);
 
   const cells = lettersArray.map((letter, index) => {
     if (index === 1) {
@@ -90,3 +98,12 @@ function Column(props) {
 }
 
 export default Column;
+
+Column.propTypes = {
+  letters: PropTypes.array,
+  gameWon: PropTypes.bool,
+  viewedWord: PropTypes.string,
+  setViewedWord: PropTypes.func,
+  sendViewedWord: PropTypes.func,
+  index: PropTypes.number,
+};

@@ -19,4 +19,4 @@ There are currently 5 words to find in order to win.
 - Viewed word appears in black borders while unused letters are in light gray borders for clarity.
 - Found words appear in a list.
 - Win message appears when all words are found (Currently 5).
-- Simple desktop and mobile responsiveness
+- Simple desktop and mobile responsiveness.

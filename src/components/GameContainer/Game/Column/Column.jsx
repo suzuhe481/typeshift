@@ -24,16 +24,16 @@ function Column({
     }
 
     // Don't move letters if top letter is not empty.
-    if (letters[0] != " ") {
+    if (letters[0] != "") {
       return;
     }
 
     // Moves the first element to the end.
-    // NOTE: Slice is used because react won't rerender the page without it.
-    // It doesn't see the change within the array as a change to the variable so it doesn't rerender it.
-    lettersArr.push(lettersArr.shift());
-    setLettersArr(lettersArr.slice());
+    var newArr = lettersArr;
+    newArr.push(newArr.shift());
+    setLettersArr(newArr);
 
+    // Gets and sends the updated word to the parent component via callback.
     var newWord = [...viewedWord];
     newWord[index] = lettersArr[1];
     newWord = newWord.join("");
@@ -49,16 +49,16 @@ function Column({
     }
 
     // Don't move letters if bottom letter is not empty.
-    if (lettersArr[lettersArr.length - 1] != " ") {
+    if (letters[letters.length - 1] != "") {
       return;
     }
 
     // Moves the last element to the front.
-    // NOTE: Slice is used because react won't rerender the page without it.
-    // It doesn't see the change within the array as a change to the variable so it doesn't rerender it.
-    lettersArr.unshift(lettersArr.pop());
-    setLettersArr(lettersArr.slice());
+    var newArr = lettersArr;
+    newArr.unshift(newArr.pop());
+    setLettersArr(newArr);
 
+    // Gets and sends the updated word to the parent component via callback.
     var newWord = [...viewedWord];
     newWord[index] = lettersArr[1];
     newWord = newWord.join("");

@@ -7,9 +7,9 @@ import "./GameContainer.scss";
 
 // 3 letter words
 const allLetters = [
-  [" ", "C", "B"],
-  ["I", "A", " "],
-  ["T", "G", " "],
+  ["", "C", "B"],
+  ["I", "A", ""],
+  ["T", "G", ""],
 ];
 
 const words = ["CAT", "BIG", "BAG", "BIT", "BAT"];

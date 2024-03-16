@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 import "./Column.scss";
 
@@ -86,13 +86,9 @@ function Column({
 
   return (
     <div className="column">
-      <FontAwesomeIcon icon={faArrowUp} onClick={moveUp} className="arrow" />
+      <FontAwesomeIcon icon={faCaretDown} onClick={moveUp} className="arrow" />
       {cells}
-      <FontAwesomeIcon
-        icon={faArrowDown}
-        onClick={moveDown}
-        className="arrow"
-      />
+      <FontAwesomeIcon icon={faCaretUp} onClick={moveDown} className="arrow" />
     </div>
   );
 }

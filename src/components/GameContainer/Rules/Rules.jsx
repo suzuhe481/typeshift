@@ -10,6 +10,8 @@ function Rules() {
         <br />
         When all the words are found, you win.
       </p>
+      <br />
+      <p>5 words to find.</p>
     </div>
   );
 }

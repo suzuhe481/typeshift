@@ -12,6 +12,14 @@ There are currently 5 words to find in order to win.
 
 ## Releases
 
+### Release 2
+
+- Implented dragging for columns on desktop and mobile instead of clicking/tapping arrows.
+- Removed borders around letters.
+- A selection area lets users know what is the current word.
+- Changed the style of arrows surrounding columns to carets.
+- Arrows appear when a column is hovered/dragged to indicate which column is being controlled.
+
 ### Release 1
 
 - 3-lettered words.

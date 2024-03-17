@@ -1,8 +1,9 @@
 .game {
+  position: relative;
   display: flex;
   flex-direction: column;
 
-  margin-bottom: 25px;
+  margin-bottom: 75px;
 
   &__columns {
     position: relative;
@@ -12,6 +13,19 @@
 
     align-items: center;
     justify-content: center;
+
+    gap: 5px;
+  }
+
+  &__selection {
+    position: absolute;
+    background-color: rgba($color: #888888, $alpha: 0.6);
+    height: 100px;
+    width: 100%;
+
+    bottom: 100px;
+
+    z-index: -1;
   }
 }
 /* Stylings for desktops */

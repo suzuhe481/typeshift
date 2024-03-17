@@ -29,6 +29,8 @@ function Column({
   const columnRef = useRef(null);
   const initialYRef = useRef(0);
   const draggedYRef = useRef(0);
+  const arrowUpRef = useRef(null);
+  const arrowDownRef = useRef(null);
 
   // Constant variables
   const numOfBoxes = letters.length;
@@ -38,6 +40,12 @@ function Column({
     display: `flex`,
     flexDirection: `column`,
     width: `100px`,
+  };
+
+  var arrowStyle = {
+    opacity: `0`,
+    height: `2.5rem`,
+    color: `#5dbafc`,
   };
 
   const letterBoxes = letters.map((letter, index) => {
@@ -176,6 +184,20 @@ function Column({
     document.removeEventListener("mousemove", handleDrag);
   };
 
+  // Sets opacity to 1 for both arrows.
+  // Used with event listener.
+  const addOpacity = () => {
+    arrowUpRef.current.style.opacity = 1;
+    arrowDownRef.current.style.opacity = 1;
+  };
+
+  // Sets opacity to 0 for both arrows.
+  // Used with event listener.
+  const removeOpacity = () => {
+    arrowUpRef.current.style.opacity = 0;
+    arrowDownRef.current.style.opacity = 0;
+  };
+
   // Runs when isAnimated state changes.
   // After animation is over (column slides to intended position),
   // clears the animation style.
@@ -221,6 +243,14 @@ function Column({
   useEffect(() => {
     handleScreenSizeChange();
     window.addEventListener("resize", handleScreenSizeChange);
+
+    columnRef.current.addEventListener("mouseover", addOpacity);
+    columnRef.current.addEventListener("mouseover", addOpacity);
+    columnRef.current.addEventListener("touchstart", addOpacity);
+
+    columnRef.current.addEventListener("mouseout", removeOpacity);
+    columnRef.current.addEventListener("mouseout", removeOpacity);
+    columnRef.current.addEventListener("touchend", removeOpacity);
   }, []);
 
   // On changes to onTouchScreen state and if game is NOT won,
@@ -240,11 +270,21 @@ function Column({
   return (
     <div ref={columnRef} className="column" style={columnStyle}>
       <div className="cell">
-        <FontAwesomeIcon icon={faCaretDown} className="arrow" />
+        <FontAwesomeIcon
+          ref={arrowDownRef}
+          style={arrowStyle}
+          icon={faCaretDown}
+          className="arrow"
+        />
       </div>
       {letterBoxes}
       <div className="cell">
-        <FontAwesomeIcon icon={faCaretUp} className="arrow" />
+        <FontAwesomeIcon
+          ref={arrowUpRef}
+          style={arrowStyle}
+          icon={faCaretUp}
+          className="arrow"
+        />
       </div>
     </div>
   );

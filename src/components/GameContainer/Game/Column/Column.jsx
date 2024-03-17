@@ -58,7 +58,7 @@ function Column({
 
   const handleMouseDown = (e) => {
     if (gameWon) {
-      removeAllColumnEventListners();
+      // removeAllColumnEventListners();
 
       return;
     }
@@ -80,7 +80,7 @@ function Column({
 
   const handleMouseUp = () => {
     if (gameWon) {
-      removeAllColumnEventListners();
+      // removeAllColumnEventListners();
       return;
     }
 
@@ -172,17 +172,18 @@ function Column({
     sendViewedWord(newWord);
   };
 
+  // NOTE: Each event listener needs a callback in order to be removed.
   // Removes all of the event listeners related to controlling the column
   // from the columnRef and document.
-  const removeAllColumnEventListners = () => {
-    columnRef.current.removeEventListener("mousedown", handleMouseDown);
-    columnRef.current.removeEventListener("touchstart", handleMouseDown);
+  // const removeAllColumnEventListners = () => {
+  //   columnRef.current.removeEventListener("mousedown", handleMouseDown);
+  //   columnRef.current.removeEventListener("touchstart", handleMouseDown);
 
-    document.removeEventListener("mouseup", handleMouseUp);
-    document.removeEventListener("touchmove", handleDrag);
-    document.removeEventListener("touchend", handleMouseUp);
-    document.removeEventListener("mousemove", handleDrag);
-  };
+  //   document.removeEventListener("mouseup", handleMouseUp);
+  //   document.removeEventListener("touchmove", handleDrag);
+  //   document.removeEventListener("touchend", handleMouseUp);
+  //   document.removeEventListener("mousemove", handleDrag);
+  // };
 
   // Sets opacity to 1 for both arrows.
   // Used with event listener.

@@ -30,6 +30,7 @@ function Game({ allLetters, sendViewedWord, gameWon }) {
     <div className="game">
       <WinMessage gameWon={gameWon} />
       <div className="game__columns">{columnItems}</div>
+      <div className="game__selection"></div>
     </div>
   );
 }

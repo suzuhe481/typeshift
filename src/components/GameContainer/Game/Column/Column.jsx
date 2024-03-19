@@ -7,12 +7,13 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import "./Column.scss";
 
 const COLUMN_ANIMATION_TIME_S = 0.1; // In seconds
-const COLUMN_ANIMATION_TIME_MS = COLUMN_ANIMATION_TIME_S * 1000; // In milliseconds
+const COLUMN_ANIMATION_TIME_MS = COLUMN_ANIMATION_TIME_S * 1000; // DON'T CHANGE. In milliseconds
 const COLUMN_TRANSITION_ANIMATION = `all ${COLUMN_ANIMATION_TIME_S}s ease-in-out`;
 const COLUMN_UPPER_LIMIT = 0; // In pixels
 const COLUMN_LOWER_LIMIT = 100; // In pixels
 
 const WORD_GROW_ANIMATION_S = 0.2; // In seconds
+const WORD_GROW_ANIMATION_MS = WORD_GROW_ANIMATION_S * 1000; // DON'T CHANGE. In milliseconds.
 const WORD_GROW_ANIMATION = `all ${WORD_GROW_ANIMATION_S}s ease-in-out`;
 
 const BOX_HEIGHT = 100; // In pixels

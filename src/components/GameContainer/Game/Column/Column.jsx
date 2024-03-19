@@ -253,19 +253,16 @@ function Column({
     colRefVar.current.addEventListener("mouseout", removeOpacity);
     colRefVar.current.addEventListener("touchend", removeOpacity);
 
-  // On changes to onTouchScreen state and if game is NOT won,
-  // Adds/removes the appropriate event listeners for mousedown and touchstart.
-  useEffect(() => {
-    if (!gameWon) {
-      if (onTouchScreen) {
-        columnRef.current.addEventListener("touchstart", handleMouseDown);
-        columnRef.current.removeEventListener("mousedown", handleMouseDown);
-      } else {
-        columnRef.current.addEventListener("mousedown", handleMouseDown);
-        columnRef.current.removeEventListener("touchstart", handleMouseDown);
-      }
-    }
-  }, [gameWon, onTouchScreen]);
+    return () => {
+      colRefVar.current.removeEventListener("mouseover", addOpacity);
+      colRefVar.current.removeEventListener("mouseover", addOpacity);
+      colRefVar.current.removeEventListener("touchstart", addOpacity);
+
+      colRefVar.current.removeEventListener("mouseout", removeOpacity);
+      colRefVar.current.removeEventListener("mouseout", removeOpacity);
+      colRefVar.current.removeEventListener("touchend", removeOpacity);
+    };
+  });
 
   return (
     <div ref={columnRef} className="column" style={columnStyle}>

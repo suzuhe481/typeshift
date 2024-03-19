@@ -18,6 +18,17 @@ function Game({
   const [viewedWord, setViewedWord] = useState(
     `${letters[0][1] + letters[1][1] + letters[2][1]}`
   );
+  const [onTouchScreen, setOnTouchScreen] = useState(() => {
+    if (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   // Creates a column for each array in letters.
   const columnItems = letters.map((col, index) => (

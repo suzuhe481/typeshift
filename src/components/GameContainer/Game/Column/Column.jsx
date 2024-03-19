@@ -222,6 +222,23 @@ function Column({
     return () => clearTimeout(timeoutId);
   }, [isAnimated]);
 
+  // Runs when a valid word is found.
+  useEffect(() => {
+    if (wordIsFound) {
+      currentLetterRef.current.style.transform = `scale(1.2)`;
+      currentLetterRef.current.style.transition = WORD_GROW_ANIMATION;
+
+      const timeoutId = setTimeout(() => {
+        currentLetterRef.current.style.transform = `scale(1)`;
+
+        setWordIsFound(false);
+      }, WORD_GROW_ANIMATION_MS);
+
+      // Cleanup function to clear the timeout if the component unmounts
+      return () => clearTimeout(timeoutId);
+    }
+  }, [wordIsFound, setWordIsFound]);
+
   // After an animation is over (column slides to intended position),
   // calculates which position the column is in.
   useEffect(() => {

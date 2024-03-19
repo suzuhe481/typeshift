@@ -40,6 +40,8 @@ function GameContainer() {
         allLetters={allLetters}
         sendViewedWord={viewedWordCallback}
         gameWon={gameWon}
+        wordIsFound={wordIsFound}
+        setWordIsFound={setWordIsFound}
       />
       <WordsList words={words} foundWords={foundWords} />
       <Rules />

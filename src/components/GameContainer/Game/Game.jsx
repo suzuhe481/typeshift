@@ -6,7 +6,13 @@ import WinMessage from "../WinMessage/WinMessage";
 
 import "./Game.scss";
 
-function Game({ allLetters, sendViewedWord, gameWon }) {
+function Game({
+  allLetters,
+  sendViewedWord,
+  gameWon,
+  wordIsFound,
+  setWordIsFound,
+}) {
   const letters = allLetters;
 
   const [viewedWord, setViewedWord] = useState(

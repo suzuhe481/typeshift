@@ -30,6 +30,7 @@ function Column({
 }) {
   // State
   const [isAnimated, setIsAnimated] = useState(false);
+  const [colPosition, setColPosition] = useState(1);
 
   // Refs
   const columnRef = useRef(null);

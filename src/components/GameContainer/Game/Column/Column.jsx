@@ -24,6 +24,9 @@ function Column({
   setViewedWord,
   sendViewedWord,
   index,
+  wordIsFound,
+  setWordIsFound,
+  onTouchScreen,
 }) {
   // State
   const [onTouchScreen, setOnTouchScreen] = useState();

@@ -38,6 +38,7 @@ function Column({
   const draggedYRef = useRef(0);
   const arrowUpRef = useRef(null);
   const arrowDownRef = useRef(null);
+  const currentLetterRef = useRef(null);
 
   // Constant variables
   const numOfBoxes = letters.length;

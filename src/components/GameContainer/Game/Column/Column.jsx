@@ -252,19 +252,6 @@ function Column({
     normalizeColumnPosition();
   }, []);
 
-  // Sets onTouchScreen state according if user is on a touch device or desktop
-  const handleScreenSizeChange = () => {
-    if (
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0
-    ) {
-      setOnTouchScreen(true);
-    } else {
-      setOnTouchScreen(false);
-    }
-  };
-
   // On initial page load.
   // Adds event listener to determine to window  to determine if user is on a touch device.
   // Runs handleScreenSizeChange on load to set onTouchScreen state variable.

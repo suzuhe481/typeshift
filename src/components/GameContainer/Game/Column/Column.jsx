@@ -103,13 +103,40 @@ function Column({
 
       columnRef.current.style.transform = `translate(0px, ${draggedYRef.current}px)`;
     } else {
-      const deltaY = initialYRef.current - e.clientY;
-      initialYRef.current = e.clientY;
-      draggedYRef.current -= deltaY;
 
-      columnRef.current.style.transform = `translate(0px, ${draggedYRef.current}px)`;
-    }
-  };
+  // On initial page load.
+  // Adds the mousedown event listener to column.
+  useEffect(() => {
+    const handleMouseDown = (e) => {
+      // Prevents columns from being dragged if game is over.
+      if (gameWon) {
+        return;
+      }
+
+      initialYRef.current = e.clientY;
+
+      if (onTouchScreen) {
+        initialYRef.current = e.touches[0].clientY;
+
+        document.addEventListener("touchmove", handleDrag);
+        document.addEventListener("touchend", handleMouseUp);
+      } else {
+        initialYRef.current = e.clientY;
+
+        document.addEventListener("mousemove", handleDrag);
+        document.addEventListener("mouseup", handleMouseUp);
+      }
+    };
+
+    const colRefVar = columnRef;
+    colRefVar.current.addEventListener("mousedown", handleMouseDown);
+    colRefVar.current.addEventListener("touchstart", handleMouseDown);
+
+    return () => {
+      colRefVar.current.removeEventListener("mousedown", handleMouseDown);
+      colRefVar.current.removeEventListener("touchstart", handleMouseDown);
+    };
+  }, [onTouchScreen, gameWon]);
 
   // If column is outside of it's bounds, animate it so it goes back to an appropriate location.
   // When column is dragged above its upper limit, lower it to the upper limit.

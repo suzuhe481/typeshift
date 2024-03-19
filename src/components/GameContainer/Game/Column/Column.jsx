@@ -57,35 +57,26 @@ function Column({
     color: `#5dbafc`,
   };
 
-  const letterBoxes = letters.map((letter, index) => {
-    return (
-      <div key={index} className="cell">
-        {letter}
-      </div>
-    );
-  });
+  // Callbacks
+  // Handles mouse or finger drag event to animate column movement.
+  const handleDrag = useCallback(
+    (e) => {
+      if (onTouchScreen) {
+        const deltaY = initialYRef.current - e.touches[0].clientY;
+        initialYRef.current = e.touches[0].clientY;
+        draggedYRef.current -= deltaY;
 
-  const handleMouseDown = (e) => {
-    if (gameWon) {
-      // removeAllColumnEventListners();
+        columnRef.current.style.transform = `translate(0px, ${draggedYRef.current}px)`;
+      } else {
+        const deltaY = initialYRef.current - e.clientY;
+        initialYRef.current = e.clientY;
+        draggedYRef.current -= deltaY;
 
-      return;
-    }
-
-    initialYRef.current = e.clientY;
-
-    if (onTouchScreen) {
-      initialYRef.current = e.touches[0].clientY;
-
-      document.addEventListener("touchmove", handleDrag);
-      document.addEventListener("touchend", handleMouseUp);
-    } else {
-      initialYRef.current = e.clientY;
-
-      document.addEventListener("mousemove", handleDrag);
-      document.addEventListener("mouseup", handleMouseUp);
-    }
-  };
+        columnRef.current.style.transform = `translate(0px, ${draggedYRef.current}px)`;
+      }
+    },
+    [onTouchScreen]
+  );
 
   const handleMouseUp = () => {
     if (gameWon) {

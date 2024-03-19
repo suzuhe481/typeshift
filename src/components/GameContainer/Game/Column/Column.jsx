@@ -256,8 +256,7 @@ function Column({
   // Adds event listener to determine to window  to determine if user is on a touch device.
   // Runs handleScreenSizeChange on load to set onTouchScreen state variable.
   useEffect(() => {
-    handleScreenSizeChange();
-    window.addEventListener("resize", handleScreenSizeChange);
+    const colRefVar = columnRef;
 
     columnRef.current.addEventListener("mouseover", addOpacity);
     columnRef.current.addEventListener("mouseover", addOpacity);

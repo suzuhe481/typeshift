@@ -95,14 +95,21 @@ function Column({
     normalizeColumnPosition();
   }, [gameWon, handleDrag, onTouchScreen]);
 
-  const handleDrag = (e) => {
-    if (onTouchScreen) {
-      const deltaY = initialYRef.current - e.touches[0].clientY;
-      initialYRef.current = e.touches[0].clientY;
-      draggedYRef.current -= deltaY;
-
-      columnRef.current.style.transform = `translate(0px, ${draggedYRef.current}px)`;
+  const letterBoxes = letters.map((letter, index) => {
+    if (colPosition === index) {
+      return (
+        <div key={index} ref={currentLetterRef} className="cell">
+          {letter}
+        </div>
+      );
     } else {
+      return (
+        <div key={index} className="cell">
+          {letter}
+        </div>
+      );
+    }
+  });
 
   // On initial page load.
   // Adds the mousedown event listener to column.

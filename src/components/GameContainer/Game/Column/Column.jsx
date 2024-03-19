@@ -11,6 +11,10 @@ const COLUMN_ANIMATION_TIME_MS = COLUMN_ANIMATION_TIME_S * 1000; // In milliseco
 const COLUMN_TRANSITION_ANIMATION = `all ${COLUMN_ANIMATION_TIME_S}s ease-in-out`;
 const COLUMN_UPPER_LIMIT = 0; // In pixels
 const COLUMN_LOWER_LIMIT = 100; // In pixels
+
+const WORD_GROW_ANIMATION_S = 0.2; // In seconds
+const WORD_GROW_ANIMATION = `all ${WORD_GROW_ANIMATION_S}s ease-in-out`;
+
 const BOX_HEIGHT = 100; // In pixels
 
 function Column({

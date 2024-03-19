@@ -30,6 +30,19 @@ function Game({
     }
   });
 
+  // Sets onTouchScreen state according if user is on a touch device or desktop
+  const handleScreenSizeChange = () => {
+    if (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    ) {
+      setOnTouchScreen(true);
+    } else {
+      setOnTouchScreen(false);
+    }
+  };
+
   // Creates a column for each array in letters.
   const columnItems = letters.map((col, index) => (
     <Column

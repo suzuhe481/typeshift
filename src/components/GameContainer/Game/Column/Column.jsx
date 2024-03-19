@@ -258,14 +258,13 @@ function Column({
   useEffect(() => {
     const colRefVar = columnRef;
 
-    columnRef.current.addEventListener("mouseover", addOpacity);
-    columnRef.current.addEventListener("mouseover", addOpacity);
-    columnRef.current.addEventListener("touchstart", addOpacity);
+    colRefVar.current.addEventListener("mouseover", addOpacity);
+    colRefVar.current.addEventListener("mouseover", addOpacity);
+    colRefVar.current.addEventListener("touchstart", addOpacity);
 
-    columnRef.current.addEventListener("mouseout", removeOpacity);
-    columnRef.current.addEventListener("mouseout", removeOpacity);
-    columnRef.current.addEventListener("touchend", removeOpacity);
-  }, []);
+    colRefVar.current.addEventListener("mouseout", removeOpacity);
+    colRefVar.current.addEventListener("mouseout", removeOpacity);
+    colRefVar.current.addEventListener("touchend", removeOpacity);
 
   // On changes to onTouchScreen state and if game is NOT won,
   // Adds/removes the appropriate event listeners for mousedown and touchstart.

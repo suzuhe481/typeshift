@@ -309,4 +309,7 @@ Column.propTypes = {
   setViewedWord: PropTypes.func,
   sendViewedWord: PropTypes.func,
   index: PropTypes.number,
+  wordIsFound: PropTypes.bool,
+  setWordIsFound: PropTypes.func,
+  onTouchScreen: PropTypes.bool,
 };

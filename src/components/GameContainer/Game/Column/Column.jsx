@@ -29,7 +29,6 @@ function Column({
   onTouchScreen,
 }) {
   // State
-  const [onTouchScreen, setOnTouchScreen] = useState();
   const [isAnimated, setIsAnimated] = useState(false);
 
   // Refs

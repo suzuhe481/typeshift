@@ -168,6 +168,7 @@ function Column({
   // Returns the index of the letter.
   const calculateColumnPosition = () => {
     const newPos = (draggedYRef.current / BOX_HEIGHT) * -1 + numOfBoxes - 1;
+    setColPosition(newPos);
 
     var oldWord = viewedWord;
     oldWord = oldWord.split("");

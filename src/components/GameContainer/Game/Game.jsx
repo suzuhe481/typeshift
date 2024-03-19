@@ -63,6 +63,9 @@ function Game({
       setViewedWord={setViewedWord}
       sendViewedWord={sendViewedWord}
       gameWon={gameWon}
+      wordIsFound={wordIsFound}
+      setWordIsFound={setWordIsFound}
+      onTouchScreen={onTouchScreen}
     />
   ));
 
@@ -81,4 +84,6 @@ Game.propTypes = {
   allLetters: PropTypes.array,
   sendViewedWord: PropTypes.func,
   gameWon: PropTypes.bool,
+  wordIsFound: PropTypes.bool,
+  setWordIsFound: PropTypes.func,
 };

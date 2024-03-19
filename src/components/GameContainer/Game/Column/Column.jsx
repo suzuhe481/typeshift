@@ -78,9 +78,9 @@ function Column({
     [onTouchScreen]
   );
 
-  const handleMouseUp = () => {
+  // Handles removing event listeners for dragging and mouse/touchend events.
+  const handleMouseUp = useCallback(() => {
     if (gameWon) {
-      // removeAllColumnEventListners();
       return;
     }
 
@@ -93,7 +93,7 @@ function Column({
     }
 
     normalizeColumnPosition();
-  };
+  }, [gameWon, handleDrag, onTouchScreen]);
 
   const handleDrag = (e) => {
     if (onTouchScreen) {

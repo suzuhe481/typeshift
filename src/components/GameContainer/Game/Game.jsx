@@ -43,6 +43,16 @@ function Game({
     }
   };
 
+  // On initial page load.
+  // Attaches resize event listener.
+  useEffect(() => {
+    window.addEventListener("resize", handleScreenSizeChange);
+
+    return () => {
+      window.removeEventListener("resize", handleScreenSizeChange);
+    };
+  }, []);
+
   // Creates a column for each array in letters.
   const columnItems = letters.map((col, index) => (
     <Column

@@ -6,7 +6,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 import "./Column.scss";
 
-const COLUMN_ANIMATION_TIME_S = 0.2; // In seconds
+const COLUMN_ANIMATION_TIME_S = 0.1; // In seconds
 const COLUMN_ANIMATION_TIME_MS = COLUMN_ANIMATION_TIME_S * 1000; // In milliseconds
 const COLUMN_TRANSITION_ANIMATION = `all ${COLUMN_ANIMATION_TIME_S}s ease-in-out`;
 const COLUMN_UPPER_LIMIT = 0; // In pixels

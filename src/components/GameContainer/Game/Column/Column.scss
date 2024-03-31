@@ -12,6 +12,7 @@
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
+  -webkit-tap-highlight-color: transparent; // Prevents blue highlighting on mobile when holding column.
 
   cursor: pointer;
   touch-action: none;

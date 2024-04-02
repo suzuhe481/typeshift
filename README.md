@@ -12,6 +12,16 @@ There are currently 5 words to find in order to win.
 
 ## Releases
 
+## Release 3
+
+- Prevented dragging of columns after game is won.
+- Animates word when a word is found by slightly growing the letters.
+- Game has been made scalable on the backend. Developer can change game options and the play area will be styled responsively.
+- Developer can adjust...
+  - Contents of the columns.
+  - The words to find.
+  - Column starting position.
+
 ### Release 2
 
 - Implented dragging for columns on desktop and mobile instead of clicking/tapping arrows.

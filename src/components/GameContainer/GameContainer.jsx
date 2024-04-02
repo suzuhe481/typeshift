@@ -57,7 +57,7 @@ function GameContainer() {
   return (
     <div className="game-container">
       <Game
-        allLetters={LettersData}
+        LettersData={LettersData}
         gameWon={gameWon}
         wordIsFound={wordIsFound}
         setWordIsFound={setWordIsFound}

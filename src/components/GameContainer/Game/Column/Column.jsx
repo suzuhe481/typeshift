@@ -70,7 +70,7 @@ function Column({
   const letterBoxes = letters.map((letter, i) => {
     if (i === colPosition) {
       return (
-        <div key={i} ref={currentLetterRef} className="cell current">
+        <div key={i} ref={currentLetterRef} className="cell">
           {letter}
         </div>
       );

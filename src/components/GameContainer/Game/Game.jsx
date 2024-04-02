@@ -7,17 +7,14 @@ import WinMessage from "../WinMessage/WinMessage";
 import "./Game.scss";
 
 function Game({
-  allLetters,
-  sendViewedWord,
+  LettersData,
   gameWon,
   wordIsFound,
   setWordIsFound,
+  currentWord,
+  setCurrentWord,
 }) {
-  const letters = allLetters;
-
-  const [viewedWord, setViewedWord] = useState(
-    `${letters[0][1] + letters[1][1] + letters[2][1]}`
-  );
+  // State to store whether user is on touchscreen or not.
   const [onTouchScreen, setOnTouchScreen] = useState(() => {
     if (
       "ontouchstart" in window ||
@@ -29,6 +26,19 @@ function Game({
       return false;
     }
   });
+
+  // Determining the longest column
+  var longestColumn = 0;
+  for (var i = 0; i < LettersData.length; i++) {
+    if (LettersData[i].letters.length > longestColumn) {
+      longestColumn = LettersData[i].letters.length;
+    }
+  }
+
+  // Styles
+  var gameSelectionStyle = {
+    bottom: `${longestColumn * 100}px`,
+  };
 
   // Sets onTouchScreen state according if user is on a touch device or desktop
   const handleScreenSizeChange = () => {
@@ -54,18 +64,19 @@ function Game({
   }, []);
 
   // Creates a column for each array in letters.
-  const columnItems = letters.map((col, index) => (
+  const columnItems = LettersData.map((col, index) => (
     <Column
       key={index}
-      index={index}
-      letters={col}
-      viewedWord={viewedWord}
-      setViewedWord={setViewedWord}
-      sendViewedWord={sendViewedWord}
+      columnIndex={index}
+      letters={col.letters}
+      initialPosition={col.initialPosition}
       gameWon={gameWon}
       wordIsFound={wordIsFound}
       setWordIsFound={setWordIsFound}
       onTouchScreen={onTouchScreen}
+      currentWord={currentWord}
+      setCurrentWord={setCurrentWord}
+      longestColumn={longestColumn}
     />
   ));
 
@@ -73,7 +84,7 @@ function Game({
     <div className="game">
       <WinMessage gameWon={gameWon} />
       <div className="game__columns">{columnItems}</div>
-      <div className="game__selection"></div>
+      <div className="game__selection" style={gameSelectionStyle}></div>
     </div>
   );
 }
@@ -81,9 +92,10 @@ function Game({
 export default Game;
 
 Game.propTypes = {
-  allLetters: PropTypes.array,
-  sendViewedWord: PropTypes.func,
+  LettersData: PropTypes.array,
   gameWon: PropTypes.bool,
   wordIsFound: PropTypes.bool,
   setWordIsFound: PropTypes.func,
+  currentWord: PropTypes.string,
+  setCurrentWord: PropTypes.func,
 };

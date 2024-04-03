@@ -3,24 +3,9 @@ import Game from "./Game/Game";
 import WordsList from "./WordsList/WordsList";
 import Rules from "./Rules/Rules";
 
+import LettersData from "../../assets/LettersData";
+
 import "./GameContainer.scss";
-
-const LettersData = [
-  {
-    letters: ["B", "C"],
-    initialPosition: 1,
-  },
-  {
-    letters: ["A", "I"],
-    initialPosition: 1,
-  },
-  {
-    letters: ["T", "G"],
-    initialPosition: 1,
-  },
-];
-
-const words = ["CAT", "BIG", "BAG", "BIT", "BAT"];
 
 function GameContainer() {
   const [foundWords, setFoundWords] = useState([]);

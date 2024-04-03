@@ -12,10 +12,14 @@ function GameContainer() {
   const [wordIsFound, setWordIsFound] = useState(false);
   const [gameWon, setGameWon] = useState(false);
 
+  var chosenDifficulty = "EASY";
+  const Letters = LettersData[chosenDifficulty].ColumnData;
+  const GoalWords = LettersData[chosenDifficulty].goalWords;
+
   // Sets the starting word based on the initial position fo each column.
   const [currentWord, setCurrentWord] = useState(() => {
     var word = "";
-    LettersData.forEach((colData) => {
+    Letters.forEach((colData) => {
       word += colData.letters[colData.initialPosition];
     });
 
@@ -25,31 +29,31 @@ function GameContainer() {
   // Checks if word is valid on every change of the currentWord variable.
   useEffect(() => {
     // If currentWord is a word in words but NOT in foundWords.
-    if (words.includes(currentWord) && !foundWords.includes(currentWord)) {
+    if (GoalWords.includes(currentWord) && !foundWords.includes(currentWord)) {
       setFoundWords((prevState) => [...prevState, currentWord]);
       setWordIsFound(true);
     }
-  }, [currentWord, foundWords]);
+  }, [GoalWords, currentWord, foundWords]);
 
   // Checks for win on every change of the foundWords variable.
   // Win condition: When the length of the arrays of "words" and "foundWords" are equal.
   useEffect(() => {
-    if (words.length === foundWords.length) {
+    if (GoalWords.length === foundWords.length) {
       setGameWon(true);
     }
-  }, [foundWords]);
+  }, [GoalWords, foundWords]);
 
   return (
     <div className="game-container">
       <Game
-        LettersData={LettersData}
+        LettersData={Letters}
         gameWon={gameWon}
         wordIsFound={wordIsFound}
         setWordIsFound={setWordIsFound}
         currentWord={currentWord}
         setCurrentWord={setCurrentWord}
       />
-      <WordsList words={words} foundWords={foundWords} />
+      <WordsList words={GoalWords} foundWords={foundWords} />
       <Rules />
     </div>
   );

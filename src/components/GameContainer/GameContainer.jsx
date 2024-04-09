@@ -2,8 +2,7 @@ import { useEffect, useContext } from "react";
 import Game from "./Game/Game";
 import WordsList from "./WordsList/WordsList";
 import Rules from "./Rules/Rules";
-
-import LettersData from "../../assets/LettersData";
+import { GameOptionsContext } from "../../Context/GameOptionsContext";
 
 import "./GameContainer.scss";
 

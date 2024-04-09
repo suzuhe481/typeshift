@@ -20,19 +20,19 @@ function GameContainer() {
   // Checks if word is valid on every change of the currentWord variable.
   useEffect(() => {
     // If currentWord is a word in words but NOT in foundWords.
-    if (GoalWords.includes(currentWord) && !foundWords.includes(currentWord)) {
+    if (goalWords.includes(currentWord) && !foundWords.includes(currentWord)) {
       setFoundWords((prevState) => [...prevState, currentWord]);
       setWordIsFound(true);
     }
-  }, [GoalWords, currentWord, foundWords]);
+  }, [goalWords, currentWord, foundWords, setFoundWords, setWordIsFound]);
 
   // Checks for win on every change of the foundWords variable.
   // Win condition: When the length of the arrays of "words" and "foundWords" are equal.
   useEffect(() => {
-    if (GoalWords.length === foundWords.length) {
+    if (goalWords.length === foundWords.length) {
       setGameWon(true);
     }
-  }, [GoalWords, foundWords]);
+  }, [goalWords, foundWords, setGameWon]);
 
   return (
     <div className="game-container">

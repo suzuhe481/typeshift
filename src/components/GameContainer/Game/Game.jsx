@@ -5,34 +5,12 @@ import WinMessage from "../WinMessage/WinMessage";
 
 import { GameOptionsContext } from "../../../Context/GameOptionsContext";
 
-function Game({
-  LettersData,
-  gameWon,
-  wordIsFound,
-  setWordIsFound,
-  currentWord,
-  setCurrentWord,
-}) {
-  // State to store whether user is on touchscreen or not.
-  const [onTouchScreen, setOnTouchScreen] = useState(() => {
-    if (
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+import "./Game.scss";
 
-  // Determining the longest column
-  var longestColumn = 0;
-  for (var i = 0; i < LettersData.length; i++) {
-    if (LettersData[i].letters.length > longestColumn) {
-      longestColumn = LettersData[i].letters.length;
-    }
-  }
+function Game() {
+  // Getting variables from context.
+  const { setOnTouchScreen, letters, longestColumn } =
+    useContext(GameOptionsContext);
 
   // Styles
   var gameSelectionStyle = {

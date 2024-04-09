@@ -7,23 +7,15 @@ import { GameOptionsContext } from "../../Context/GameOptionsContext";
 import "./GameContainer.scss";
 
 function GameContainer() {
-  const [foundWords, setFoundWords] = useState([]);
-  const [wordIsFound, setWordIsFound] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
-
-  var chosenDifficulty = "EASY";
-  const Letters = LettersData[chosenDifficulty].ColumnData;
-  const GoalWords = LettersData[chosenDifficulty].goalWords;
-
-  // Sets the starting word based on the initial position fo each column.
-  const [currentWord, setCurrentWord] = useState(() => {
-    var word = "";
-    Letters.forEach((colData) => {
-      word += colData.letters[colData.initialPosition];
-    });
-
-    return word;
-  });
+  // Getting variables from context.
+  const {
+    foundWords,
+    setFoundWords,
+    setWordIsFound,
+    setGameWon,
+    currentWord,
+    goalWords,
+  } = useContext(GameOptionsContext);
 
   // Checks if word is valid on every change of the currentWord variable.
   useEffect(() => {

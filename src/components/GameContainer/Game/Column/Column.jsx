@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import PropTypes from "prop-types";
+
+import { GameOptionsContext } from "../../../../Context/GameOptionsContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -16,24 +18,27 @@ const WORD_GROW_ANIMATION = `all ${WORD_GROW_ANIMATION_S}s ease-in-out`;
 
 const BOX_HEIGHT = 100; // In pixels
 
-function Column({
-  letters,
-  initialPosition,
-  gameWon,
-  columnIndex,
-  wordIsFound,
-  setWordIsFound,
-  onTouchScreen,
-  currentWord,
-  setCurrentWord,
-  longestColumn,
-}) {
+function Column({ initialPosition, columnIndex }) {
+  const {
+    letters,
+    gameWon,
+    onTouchScreen,
+    wordIsFound,
+    setWordIsFound,
+    currentWord,
+    setCurrentWord,
+    longestColumn,
+  } = useContext(GameOptionsContext);
+
+  // Stores the letters for the specific column of columnIndex.
+  const columnLetters = letters[columnIndex].letters;
+
   // The bounds of where the column can move.
   // Lower - Prevents column from moving below this limit.
   // Upper - Prevents column from mobing above this limit.
-  var COLUMN_LOWER_LIMIT = (longestColumn - letters.length) * -50; // In pixels
+  var COLUMN_LOWER_LIMIT = (longestColumn - columnLetters.length) * -50; // In pixels
   var COLUMN_UPPER_LIMIT =
-    COLUMN_LOWER_LIMIT - (letters.length - 1) * BOX_HEIGHT; // In pixels
+    COLUMN_LOWER_LIMIT - (columnLetters.length - 1) * BOX_HEIGHT; // In pixels
 
   // State
   const [isAnimated, setIsAnimated] = useState(false);
@@ -41,7 +46,7 @@ function Column({
   const [isDragging, setIsDragging] = useState(false);
 
   const startPosition =
-    colPosition * -100 + (longestColumn - letters.length) * -50;
+    colPosition * -100 + (longestColumn - columnLetters.length) * -50;
 
   // Refs
   const columnRef = useRef(null);
@@ -67,7 +72,7 @@ function Column({
   };
 
   // Creates the cells containing each letter.
-  const letterBoxes = letters.map((letter, i) => {
+  const letterBoxes = columnLetters.map((letter, i) => {
     if (i === colPosition) {
       return (
         <div key={i} ref={currentLetterRef} className="cell">
@@ -225,11 +230,17 @@ function Column({
     oldWord = oldWord.split("");
 
     var newWord = oldWord;
-    newWord[columnIndex] = letters[newPos];
+    newWord[columnIndex] = columnLetters[newPos];
     newWord = newWord.join("");
 
     setCurrentWord(newWord);
-  }, [COLUMN_LOWER_LIMIT, columnIndex, currentWord, letters, setCurrentWord]);
+  }, [
+    COLUMN_LOWER_LIMIT,
+    columnIndex,
+    currentWord,
+    columnLetters,
+    setCurrentWord,
+  ]);
 
   // Sets opacity to 1 for both arrows.
   // Used with event listener.
@@ -258,7 +269,7 @@ function Column({
     return () => clearTimeout(timeoutId);
   }, [isAnimated]);
 
-  // Grows the letter stored in the crurentLetterRef.
+  // Animates the letter stored in the currentLetterRef by growing it then going back to original size.
   // Runs when a valid word is found.
   useEffect(() => {
     if (wordIsFound) {

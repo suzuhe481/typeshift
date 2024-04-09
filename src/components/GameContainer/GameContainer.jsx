@@ -36,15 +36,8 @@ function GameContainer() {
 
   return (
     <div className="game-container">
-      <Game
-        LettersData={Letters}
-        gameWon={gameWon}
-        wordIsFound={wordIsFound}
-        setWordIsFound={setWordIsFound}
-        currentWord={currentWord}
-        setCurrentWord={setCurrentWord}
-      />
-      <WordsList words={GoalWords} foundWords={foundWords} />
+      <Game />
+      <WordsList words={goalWords} foundWords={foundWords} />
       <Rules />
     </div>
   );

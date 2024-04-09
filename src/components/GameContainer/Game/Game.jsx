@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useContext } from "react";
 
 import Column from "./Column/Column";
 import WinMessage from "../WinMessage/WinMessage";
 
-import "./Game.scss";
+import { GameOptionsContext } from "../../../Context/GameOptionsContext";
 
 function Game({
   LettersData,

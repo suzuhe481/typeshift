@@ -16,8 +16,6 @@ const WORD_GROW_ANIMATION_S = 0.2; // In seconds
 const WORD_GROW_ANIMATION_MS = WORD_GROW_ANIMATION_S * 1000; // DON'T CHANGE. In milliseconds.
 const WORD_GROW_ANIMATION = `all ${WORD_GROW_ANIMATION_S}s ease-in-out`;
 
-const BOX_HEIGHT = 100; // In pixels
-
 function Column({ initialPosition, columnIndex }) {
   const {
     letters,
@@ -28,6 +26,9 @@ function Column({ initialPosition, columnIndex }) {
     currentWord,
     setCurrentWord,
     longestColumn,
+    BOX_HEIGHT,
+    LETTER_SIZE,
+    ARROW_WIDTH,
   } = useContext(GameOptionsContext);
 
   // Stores the letters for the specific column of columnIndex.
@@ -36,7 +37,8 @@ function Column({ initialPosition, columnIndex }) {
   // The bounds of where the column can move.
   // Lower - Prevents column from moving below this limit.
   // Upper - Prevents column from mobing above this limit.
-  var COLUMN_LOWER_LIMIT = (longestColumn - columnLetters.length) * -50; // In pixels
+  var COLUMN_LOWER_LIMIT =
+    (longestColumn - columnLetters.length) * -(BOX_HEIGHT / 2); // In pixels
   var COLUMN_UPPER_LIMIT =
     COLUMN_LOWER_LIMIT - (columnLetters.length - 1) * BOX_HEIGHT; // In pixels
 
@@ -46,7 +48,8 @@ function Column({ initialPosition, columnIndex }) {
   const [isDragging, setIsDragging] = useState(false);
 
   const startPosition =
-    colPosition * -100 + (longestColumn - columnLetters.length) * -50;
+    colPosition * -BOX_HEIGHT +
+    (longestColumn - columnLetters.length) * -(BOX_HEIGHT / 2);
 
   // Refs
   const columnRef = useRef(null);
@@ -61,27 +64,34 @@ function Column({ initialPosition, columnIndex }) {
   var columnStyle = {
     display: `flex`,
     flexDirection: `column`,
-    width: `100px`,
+    width: `${BOX_HEIGHT}px`,
     position: `relative`,
   };
 
   var arrowStyle = {
     opacity: `0`,
-    height: `2.5rem`,
     color: `#5dbafc`,
+    height: `${BOX_HEIGHT}px`,
+    width: `${ARROW_WIDTH}rem`,
+  };
+
+  var cellStyle = {
+    height: `${BOX_HEIGHT}px`,
+    width: `${BOX_HEIGHT}px`,
+    fontSize: `${LETTER_SIZE}rem`,
   };
 
   // Creates the cells containing each letter.
   const letterBoxes = columnLetters.map((letter, i) => {
     if (i === colPosition) {
       return (
-        <div key={i} ref={currentLetterRef} className="cell">
+        <div key={i} ref={currentLetterRef} style={cellStyle} className="cell">
           {letter}
         </div>
       );
     } else {
       return (
-        <div key={i} className="cell">
+        <div key={i} style={cellStyle} className="cell">
           {letter}
         </div>
       );
@@ -184,7 +194,7 @@ function Column({ initialPosition, columnIndex }) {
       columnRef.current.style.transition = COLUMN_TRANSITION_ANIMATION; // Animation is removed via a useEffect.
       columnRef.current.style.transform = `translateY(${draggedYRef.current}px)`;
     }
-  }, [COLUMN_LOWER_LIMIT, COLUMN_UPPER_LIMIT]);
+  }, [COLUMN_LOWER_LIMIT, COLUMN_UPPER_LIMIT, BOX_HEIGHT]);
 
   // Checks is a value is between 2 other values.
   // Returns a boolean.
@@ -240,6 +250,7 @@ function Column({ initialPosition, columnIndex }) {
     currentWord,
     columnLetters,
     setCurrentWord,
+    BOX_HEIGHT,
   ]);
 
   // Sets opacity to 1 for both arrows.
@@ -345,17 +356,11 @@ function Column({ initialPosition, columnIndex }) {
           ref={arrowDownRef}
           style={arrowStyle}
           icon={faCaretDown}
-          className="arrow"
         />
       </div>
       {letterBoxes}
       <div className="cell">
-        <FontAwesomeIcon
-          ref={arrowUpRef}
-          style={arrowStyle}
-          icon={faCaretUp}
-          className="arrow"
-        />
+        <FontAwesomeIcon ref={arrowUpRef} style={arrowStyle} icon={faCaretUp} />
       </div>
     </div>
   );

@@ -7,8 +7,8 @@ const LettersData = {
         initialPosition: 1,
       },
       {
-        letters: ["A", "I"],
-        initialPosition: 1,
+        letters: ["I", "A"],
+        initialPosition: 0,
       },
       {
         letters: ["T", "G"],
@@ -17,19 +17,23 @@ const LettersData = {
     ],
   },
   MEDIUM: {
-    goalWords: ["CAT", "BIG", "BAG", "BIT", "BAT"],
+    goalWords: ["ROSE", "RUST", "VASE", "VICE", "RAIN", "VAIN", "MAIN"],
     ColumnData: [
       {
-        letters: ["B", "C"],
+        letters: ["R", "V", "M"],
         initialPosition: 1,
       },
       {
-        letters: ["A", "I"],
+        letters: ["O", "U", "A", "I"],
+        initialPosition: 2,
+      },
+      {
+        letters: ["S", "C", "I"],
         initialPosition: 1,
       },
       {
-        letters: ["T", "G"],
-        initialPosition: 1,
+        letters: ["E", "T", "N"],
+        initialPosition: 2,
       },
     ],
   },
@@ -51,11 +55,14 @@ const LettersData = {
       "LOSER",
       "TASED",
       "TASER",
+      "DARED",
+      "TOWED",
+      "TRIED",
     ],
     ColumnData: [
       {
         letters: ["D", "T", "L", "P"],
-        initialPosition: 1,
+        initialPosition: 2,
       },
       {
         letters: ["O", "R", "A"],
@@ -63,11 +70,11 @@ const LettersData = {
       },
       {
         letters: ["T", "W", "S", "R", "I"],
-        initialPosition: 1,
+        initialPosition: 2,
       },
       {
         letters: ["G", "E", "T", "N"],
-        initialPosition: 1,
+        initialPosition: 0,
       },
       {
         letters: ["T", "D", "R", "E"],

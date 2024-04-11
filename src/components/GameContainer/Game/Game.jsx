@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 
 import Column from "./Column/Column";
 import WinMessage from "../WinMessage/WinMessage";
+import InstructionsModal from "./InstructionsModal/InstructionsModal";
 
 import { GameOptionsContext } from "../../../Context/GameOptionsContext";
 import { StylesContext } from "../../../Context/StylesContext";
@@ -64,6 +65,7 @@ function Game() {
 
   return (
     <div className="game">
+      <InstructionsModal />
       <WinMessage />
       <div className="game__columns" style={gameColumnsStyle}>
         {columnItems}

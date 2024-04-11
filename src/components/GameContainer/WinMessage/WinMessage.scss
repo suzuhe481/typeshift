@@ -1,11 +1,25 @@
 .game__message {
-  position: relative;
-  top: 0;
+  // Places in the middle of the game container.
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: monospace;
 
   text-align: center;
 
   font-size: 2rem;
   padding: 20px 0;
+
+  width: 40%;
+
+  border: 3px solid black;
+  border-radius: 10px;
+
+  background-color: lightgray;
+
+  z-index: 2;
 
   &.false {
     opacity: 0;
@@ -13,5 +27,15 @@
 
   &.show {
     opacity: 1;
+  }
+
+  &.disabled {
+    display: none;
+  }
+
+  .win-button {
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1rem;
   }
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 
 import { GameOptionsContext } from "../../../../Context/GameOptionsContext";
+import { StylesContext } from "../../../../Context/StylesContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -26,10 +27,9 @@ function Column({ initialPosition, columnIndex }) {
     currentWord,
     setCurrentWord,
     longestColumn,
-    BOX_HEIGHT,
-    LETTER_SIZE,
-    ARROW_WIDTH,
   } = useContext(GameOptionsContext);
+
+  const { BOX_HEIGHT, LETTER_SIZE, ARROW_WIDTH } = useContext(StylesContext);
 
   // Stores the letters for the specific column of columnIndex.
   const columnLetters = letters[columnIndex].letters;

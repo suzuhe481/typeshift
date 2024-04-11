@@ -305,23 +305,23 @@ function Column({ initialPosition, columnIndex }) {
 
   // Adds event listeners for handling mouse up, mouse down, and dragging.
   useEffect(() => {
-    const colRefVar = columnRef;
+    const colRefVar = columnRef.current;
 
     // Event listeners for mouse actions
-    colRefVar.current.addEventListener("mousedown", handleMouseDown);
+    colRefVar.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
-    colRefVar.current.addEventListener("touchstart", handleMouseDown);
+    colRefVar.addEventListener("touchstart", handleMouseDown);
     window.addEventListener("touchend", handleMouseUp);
 
     window.addEventListener("mousemove", handleDrag);
     window.addEventListener("touchmove", handleDrag);
 
     return () => {
-      colRefVar.current.removeEventListener("mousedown", handleMouseDown);
+      colRefVar.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
 
-      colRefVar.current.removeEventListener("touchstart", handleMouseDown);
+      colRefVar.removeEventListener("touchstart", handleMouseDown);
       window.removeEventListener("touchend", handleMouseUp);
 
       window.removeEventListener("mousemove", handleDrag);
@@ -332,20 +332,20 @@ function Column({ initialPosition, columnIndex }) {
   // On initial page load.
   // Event listeners for arrows appearing around letter columns on hover.
   useEffect(() => {
-    const colRefVar = columnRef;
+    const colRefVar = columnRef.current;
 
-    colRefVar.current.addEventListener("mouseover", addOpacity);
-    colRefVar.current.addEventListener("touchstart", addOpacity);
+    colRefVar.addEventListener("mouseover", addOpacity);
+    colRefVar.addEventListener("touchstart", addOpacity);
 
-    colRefVar.current.addEventListener("mouseout", removeOpacity);
-    colRefVar.current.addEventListener("touchend", removeOpacity);
+    colRefVar.addEventListener("mouseout", removeOpacity);
+    colRefVar.addEventListener("touchend", removeOpacity);
 
     return () => {
-      colRefVar.current.removeEventListener("mouseover", addOpacity);
-      colRefVar.current.removeEventListener("touchstart", addOpacity);
+      colRefVar.removeEventListener("mouseover", addOpacity);
+      colRefVar.removeEventListener("touchstart", addOpacity);
 
-      colRefVar.current.removeEventListener("mouseout", removeOpacity);
-      colRefVar.current.removeEventListener("touchend", removeOpacity);
+      colRefVar.removeEventListener("mouseout", removeOpacity);
+      colRefVar.removeEventListener("touchend", removeOpacity);
     };
   }, []);
 

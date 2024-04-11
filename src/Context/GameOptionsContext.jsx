@@ -6,8 +6,10 @@ import LettersData from "../assets/LettersData";
 export const GameOptionsContext = createContext();
 
 const GameOptionsProvider = ({ children }) => {
+  const [gameStart, setGameStart] = useState(false);
+
   // The difficulty of the current game.
-  const [lettersDifficulty, setLettersDifficulty] = useState("HARD");
+  const [lettersDifficulty, setLettersDifficulty] = useState("");
 
   // The words found of the current game.
   const [foundWords, setFoundWords] = useState([]);
@@ -19,35 +21,16 @@ const GameOptionsProvider = ({ children }) => {
   const [gameWon, setGameWon] = useState(false);
 
   // The letters for the current difficulty.
-  const [letters, setLetters] = useState(
-    LettersData[lettersDifficulty].ColumnData
-  );
+  const [letters, setLetters] = useState();
+
   // The goal words to find for the current difficulty.
-  const [goalWords, setGoalWords] = useState(
-    LettersData[lettersDifficulty].goalWords
-  );
+  const [goalWords, setGoalWords] = useState();
 
   // Sets the starting word based on the initial position fo each column.
-  const [currentWord, setCurrentWord] = useState(() => {
-    var word = "";
-    letters.forEach((colData) => {
-      word += colData.letters[colData.initialPosition];
-    });
-
-    return word;
-  });
+  const [currentWord, setCurrentWord] = useState();
 
   // Determines longest column of the current game.
-  const [longestColumn, setLongestColumn] = useState(() => {
-    var longestColumn = 0;
-    for (var i = 0; i < letters.length; i++) {
-      if (letters[i].letters.length > longestColumn) {
-        longestColumn = letters[i].letters.length;
-      }
-    }
-
-    return longestColumn;
-  });
+  const [longestColumn, setLongestColumn] = useState();
 
   // State to store whether user is on touchscreen or not.
   const [onTouchScreen, setOnTouchScreen] = useState(() => {
@@ -61,6 +44,42 @@ const GameOptionsProvider = ({ children }) => {
       return false;
     }
   });
+
+  // Sets game options based on chosen difficulty.
+  function changeDifficulty(newDifficulty) {
+    const gameData = LettersData[newDifficulty];
+
+    // Setting difficulty.
+    setLettersDifficulty(newDifficulty);
+
+    // Setting letters data.
+    setLetters(gameData.ColumnData);
+
+    // Setting goal words.
+    setGoalWords(gameData.goalWords);
+
+    // Setting the current word.
+    setCurrentWord(() => {
+      var word = "";
+      gameData.ColumnData.forEach((colData) => {
+        word += colData.letters[colData.initialPosition];
+      });
+
+      return word;
+    });
+
+    // Setting longest column.
+    setLongestColumn(() => {
+      var longestColumn = 0;
+      for (var i = 0; i < gameData.ColumnData.length; i++) {
+        if (gameData.ColumnData[i].letters.length > longestColumn) {
+          longestColumn = gameData.ColumnData[i].letters.length;
+        }
+      }
+
+      return longestColumn;
+    });
+  }
 
   return (
     <div>
@@ -84,6 +103,9 @@ const GameOptionsProvider = ({ children }) => {
           setGoalWords,
           longestColumn,
           setLongestColumn,
+          gameStart,
+          setGameStart,
+          changeDifficulty,
         }}
       >
         {children}

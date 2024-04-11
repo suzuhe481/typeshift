@@ -9,12 +9,21 @@ import "./Game.scss";
 
 function Game() {
   // Getting variables from context.
-  const { setOnTouchScreen, letters, longestColumn } =
+  const { setOnTouchScreen, letters, longestColumn, BOX_HEIGHT } =
     useContext(GameOptionsContext);
 
   // Styles
   var gameSelectionStyle = {
-    bottom: `${longestColumn * 100}px`,
+    bottom: `${longestColumn * BOX_HEIGHT}px`,
+    height: `${BOX_HEIGHT}px`,
+
+    // Moves selection area along with the column.
+    transform: `translateY(${(longestColumn / 3) * BOX_HEIGHT}px)`,
+  };
+
+  var gameColumnsStyle = {
+    // Moves columns down to provide more play area.
+    transform: `translateY(${(longestColumn / 3) * BOX_HEIGHT}px)`,
   };
 
   // Sets onTouchScreen state according if user is on a touch device or desktop
@@ -53,7 +62,9 @@ function Game() {
   return (
     <div className="game">
       <WinMessage />
-      <div className="game__columns">{columnItems}</div>
+      <div className="game__columns" style={gameColumnsStyle}>
+        {columnItems}
+      </div>
       <div className="game__selection" style={gameSelectionStyle}></div>
     </div>
   );

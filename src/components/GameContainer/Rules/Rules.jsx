@@ -5,13 +5,15 @@ function Rules() {
     <div className="rules">
       <p className="rules__title">Rules</p>
       <p className="rules__text">
-        In Typeshift, the goal is to find all the possible words with the given
-        letters. Click/tap the arrows to move the letters in each columns.
+        Find words by sliding the columns up and down. You need a certain number
+        of words to beat the level.
         <br />
-        When all the words are found, you win.
+        <br />
+        If you find a word that is not counted but you think should, send me a
+        message here and let me know in the Contact Me section.
+        <br />
+        <a href="https://www.hectorsuazo.com/#contact">I FOUND A WORD</a>
       </p>
-      <br />
-      <p>5 words to find.</p>
     </div>
   );
 }

@@ -4,13 +4,16 @@ import Column from "./Column/Column";
 import WinMessage from "../WinMessage/WinMessage";
 
 import { GameOptionsContext } from "../../../Context/GameOptionsContext";
+import { StylesContext } from "../../../Context/StylesContext";
 
 import "./Game.scss";
 
 function Game() {
   // Getting variables from context.
-  const { setOnTouchScreen, letters, longestColumn, BOX_HEIGHT } =
+  const { setOnTouchScreen, letters, longestColumn } =
     useContext(GameOptionsContext);
+
+  const { BOX_HEIGHT } = useContext(StylesContext);
 
   // Styles
   var gameSelectionStyle = {

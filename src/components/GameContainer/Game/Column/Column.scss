@@ -4,6 +4,9 @@
   font-family: monospace;
   font-weight: bold;
 
+  justify-content: center;
+  align-items: center;
+
   font-size: 5rem;
 
   -webkit-touch-callout: none; /* iOS Safari */
@@ -25,7 +28,4 @@
   justify-content: center;
 
   pointer-events: all;
-
-  width: 100px;
-  height: 100px;
 }

@@ -81,6 +81,18 @@ const GameOptionsProvider = ({ children }) => {
     });
   }
 
+  // Resets the game.
+  function resetGame() {
+    setLettersDifficulty("");
+    setFoundWords([]);
+    setWordIsFound(false);
+    setGameWon(false);
+    setLetters();
+    setGoalWords();
+    setLongestColumn();
+    setGameStart(false);
+  }
+
   return (
     <div>
       <GameOptionsContext.Provider
@@ -106,6 +118,7 @@ const GameOptionsProvider = ({ children }) => {
           gameStart,
           setGameStart,
           changeDifficulty,
+          resetGame,
         }}
       >
         {children}

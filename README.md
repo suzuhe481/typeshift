@@ -4,6 +4,8 @@ A game built with React where you need to find words with the given letters by s
 
 [Try the live demo here.](https://typeshift.hectorsuazo.com/)
 
+This demo is a recreation of a game with the same name by Zach Gage. [Zach Gage's Typeshift](http://www.playtypeshift.com/)
+
 ## Description
 
 Letters are arranged in columns. Users must shift columns up and down to find the hidden words.
@@ -11,6 +13,16 @@ Letters are arranged in columns. Users must shift columns up and down to find th
 There are currently 5 words to find in order to win.
 
 ## Releases
+
+## Release 4
+
+- Implemented useContext to more easily pass data between components.
+- Users can pick between 3 difficulty levels. Easy, Medium, or Hard.
+- Modal appears before starting the game, giving users instructions on how to play.
+- Link allows users to message developer if they find a word that isn't in the game.
+- Counter shows words needed to win.
+- Play again button.
+- Changed font styles.
 
 ## Release 3
 

@@ -12,6 +12,18 @@
   &__title {
     text-decoration: underline;
   }
+
+  .message-link {
+    text-decoration: none;
+    border: 2px outset black;
+    border-radius: 3px;
+    padding: 3px 15px;
+
+    color: black;
+    background-color: rgb(235, 235, 235);
+
+    text-wrap: nowrap;
+  }
 }
 
 /* Stylings for desktops */

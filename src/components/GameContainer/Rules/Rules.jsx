@@ -12,14 +12,16 @@ function Rules() {
         If you find a word that is not counted but you think should, send me a
         message here and let me know in the Contact Me section.
         <br />
-        <a
-          href="https://www.hectorsuazo.com/#contact"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          I FOUND A WORD
-        </a>
+        <br />
       </p>
+      <a
+        href="https://www.hectorsuazo.com/#contact"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="message-link"
+      >
+        I FOUND A NEW WORD!
+      </a>
     </div>
   );
 }

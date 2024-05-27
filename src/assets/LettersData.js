@@ -17,7 +17,24 @@ const LettersData = {
     ],
   },
   MEDIUM: {
-    goalWords: ["ROSE", "RUST", "VASE", "VICE", "RAIN", "VAIN", "MAIN"],
+    goalWords: [
+      "ROSE",
+      "RUST",
+      "VASE",
+      "VICE",
+      "RAIN",
+      "VAIN",
+      "MAIN",
+      "MIST",
+      "MICE",
+      "MACE",
+      "VAST",
+      "MOST",
+      "MAST",
+      "RACE",
+      "RISE",
+      "VISE",
+    ],
     ColumnData: [
       {
         letters: ["R", "V", "M"],

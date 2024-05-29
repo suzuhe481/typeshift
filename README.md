@@ -14,7 +14,12 @@ There are currently 5 words to find in order to win.
 
 ## Releases
 
-## Release 4
+### Release 5
+
+- Added new words to Medium difficulty.
+- Transitioned project files from JavaScript to TypeScript.
+
+### Release 4
 
 - Implemented useContext to more easily pass data between components.
 - Users can pick between 3 difficulty levels. Easy, Medium, or Hard.
@@ -24,7 +29,7 @@ There are currently 5 words to find in order to win.
 - Play again button.
 - Changed font styles.
 
-## Release 3
+### Release 3
 
 - Prevented dragging of columns after game is won.
 - Animates word when a word is found by slightly growing the letters.

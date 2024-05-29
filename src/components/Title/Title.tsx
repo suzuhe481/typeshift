@@ -2,9 +2,9 @@ import "./Title.scss";
 
 function Title() {
   return (
-    <>
-      <h1 className="title">Typeshift</h1>
-    </>
+    <h1 className="title no-highlight">
+      <a href="/">Typeshift</a>
+    </h1>
   );
 }
 

@@ -10,8 +10,8 @@ function DifficultyMenu() {
   const difficulties = ["EASY", "MEDIUM", "HARD"];
 
   // Starts the game after setting the difficulty.
-  const handleButtonClick = (e) => {
-    changeDifficulty(e.target.value);
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    changeDifficulty(e.currentTarget.value);
     setGameStart(true);
   };
 

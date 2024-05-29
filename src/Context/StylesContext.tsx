@@ -1,10 +1,23 @@
-import PropTypes from "prop-types";
-import { useContext, createContext } from "react";
+import { useContext, createContext, ReactNode } from "react";
 import { GameOptionsContext } from "./GameOptionsContext";
 
-export const StylesContext = createContext();
+interface ChildrenProps {
+  children?: ReactNode;
+}
 
-const StylesProvider = ({ children }) => {
+interface IStylesContextProps {
+  children?: ReactNode;
+
+  BOX_HEIGHT: number;
+  LETTER_SIZE: string;
+  ARROW_WIDTH: number;
+}
+
+export const StylesContext = createContext<IStylesContextProps>(
+  {} as IStylesContextProps
+);
+
+const StylesProvider = ({ children }: ChildrenProps) => {
   const { lettersDifficulty } = useContext(GameOptionsContext);
 
   const BOX_HEIGHT = getBoxHeight(); // In pixels
@@ -17,7 +30,7 @@ const StylesProvider = ({ children }) => {
       return 100;
     } else if (lettersDifficulty === "MEDIUM") {
       return 100;
-    } else if (lettersDifficulty === "HARD") {
+    } /* lettersDifficulty === "HARD" */ else {
       return 75;
     }
   }
@@ -28,7 +41,7 @@ const StylesProvider = ({ children }) => {
       return `5`;
     } else if (lettersDifficulty === "MEDIUM") {
       return `5`;
-    } else if (lettersDifficulty === "HARD") {
+    } /* lettersDifficulty === "HARD" */ else {
       return `2.5`;
     }
   }
@@ -39,7 +52,5 @@ const StylesProvider = ({ children }) => {
     </StylesContext.Provider>
   );
 };
-
-StylesProvider.propTypes = { children: PropTypes.element };
 
 export default StylesProvider;

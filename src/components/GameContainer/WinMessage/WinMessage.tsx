@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import PropTypes from "prop-types";
 
 import { GameOptionsContext } from "../../../Context/GameOptionsContext";
 
@@ -21,7 +20,3 @@ function WinMessage() {
 }
 
 export default WinMessage;
-
-WinMessage.propTypes = {
-  gameWon: PropTypes.bool,
-};

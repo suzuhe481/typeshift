@@ -1,43 +1,84 @@
-import PropTypes from "prop-types";
-import { useState, createContext } from "react";
+import { useState, createContext, ReactNode } from "react";
 
 import LettersData from "../assets/LettersData";
 
-export const GameOptionsContext = createContext();
+interface ChildrenProps {
+  children?: ReactNode;
+}
 
-const GameOptionsProvider = ({ children }) => {
+// Interface declaration containing types for the Context's
+// variables and functions.
+interface IGameOptionsContextProps {
+  children?: ReactNode;
+
+  lettersDifficulty: string;
+  setLettersDifficulty: (difficulty: string) => void;
+  foundWords: string[];
+  setFoundWords: React.Dispatch<React.SetStateAction<string[]>>;
+  wordIsFound: boolean;
+  setWordIsFound: React.Dispatch<React.SetStateAction<boolean>>;
+  gameWon: boolean;
+  setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
+  onTouchScreen: boolean;
+  setOnTouchScreen: (value: boolean) => void;
+  currentWord: string;
+  setCurrentWord: React.Dispatch<React.SetStateAction<string>>;
+  letters: any[];
+  setLetters: React.Dispatch<React.SetStateAction<any>>;
+  goalWords: string[];
+  setGoalWords: React.Dispatch<React.SetStateAction<string[]>>;
+  longestColumn: number;
+  setLongestColumn: React.Dispatch<React.SetStateAction<number>>;
+  gameStart: boolean;
+  setGameStart: React.Dispatch<React.SetStateAction<boolean>>;
+  changeDifficulty: (newDifficulty: string) => void;
+  resetGame: () => void;
+}
+
+export const GameOptionsContext = createContext<IGameOptionsContextProps>(
+  {} as IGameOptionsContextProps
+);
+
+const GameOptionsProvider = ({ children }: ChildrenProps) => {
   const [gameStart, setGameStart] = useState(false);
 
   // The difficulty of the current game.
   const [lettersDifficulty, setLettersDifficulty] = useState("");
 
   // The words found of the current game.
-  const [foundWords, setFoundWords] = useState([]);
+  const [foundWords, setFoundWords] = useState<string[]>([]);
 
   // Boolean if a word is found.
   const [wordIsFound, setWordIsFound] = useState(false);
 
   // State for game win.
-  const [gameWon, setGameWon] = useState(false);
+  const [gameWon, setGameWon] = useState<boolean>(false);
 
   // The letters for the current difficulty.
-  const [letters, setLetters] = useState();
+  const [letters, setLetters] = useState([]);
 
   // The goal words to find for the current difficulty.
-  const [goalWords, setGoalWords] = useState();
+  const [goalWords, setGoalWords] = useState<string[]>([]);
 
   // Sets the starting word based on the initial position fo each column.
-  const [currentWord, setCurrentWord] = useState();
+  const [currentWord, setCurrentWord] = useState<string>("");
 
   // Determines longest column of the current game.
-  const [longestColumn, setLongestColumn] = useState();
+  const [longestColumn, setLongestColumn] = useState<number>(0);
+
+  // interface ISetOnTouchScreen {
+  //   onTouchScreen: boolean;
+  //   setOnTouchScreen?: React.Dispatch<
+  //     React.SetStateAction<boolean | ISetOnTouchScreen>
+  //   >;
+  // }
 
   // State to store whether user is on touchscreen or not.
   const [onTouchScreen, setOnTouchScreen] = useState(() => {
     if (
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0
+      navigator.maxTouchPoints > 0
     ) {
       return true;
     } else {
@@ -46,7 +87,7 @@ const GameOptionsProvider = ({ children }) => {
   });
 
   // Sets game options based on chosen difficulty.
-  function changeDifficulty(newDifficulty) {
+  function changeDifficulty(newDifficulty: string) {
     const gameData = LettersData[newDifficulty];
 
     // Setting difficulty.
@@ -61,9 +102,14 @@ const GameOptionsProvider = ({ children }) => {
     // Setting the current word.
     setCurrentWord(() => {
       var word = "";
-      gameData.ColumnData.forEach((colData) => {
-        word += colData.letters[colData.initialPosition];
-      });
+      gameData.ColumnData.forEach(
+        (colData: {
+          letters: { [x: string]: string };
+          initialPosition: string | number;
+        }) => {
+          word += colData.letters[colData.initialPosition];
+        }
+      );
 
       return word;
     });
@@ -87,9 +133,9 @@ const GameOptionsProvider = ({ children }) => {
     setFoundWords([]);
     setWordIsFound(false);
     setGameWon(false);
-    setLetters();
-    setGoalWords();
-    setLongestColumn();
+    setLetters;
+    setGoalWords;
+    setLongestColumn;
     setGameStart(false);
   }
 
@@ -126,7 +172,5 @@ const GameOptionsProvider = ({ children }) => {
     </div>
   );
 };
-
-GameOptionsProvider.propTypes = { children: PropTypes.element };
 
 export default GameOptionsProvider;

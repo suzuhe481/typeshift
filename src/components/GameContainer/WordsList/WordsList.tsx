@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import PropTypes from "prop-types";
 
 import { GameOptionsContext } from "../../../Context/GameOptionsContext";
 
@@ -15,7 +14,7 @@ function WordsList() {
   ));
 
   if (gameStart) {
-    var counter = (
+    var counter: any = (
       <>
         {foundWords.length}/{goalWords.length}
       </>
@@ -35,7 +34,3 @@ function WordsList() {
 }
 
 export default WordsList;
-
-WordsList.propTypes = {
-  foundWords: PropTypes.array,
-};

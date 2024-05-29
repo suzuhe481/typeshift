@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
-import PropTypes from "prop-types";
 
 import { GameOptionsContext } from "../../../../Context/GameOptionsContext";
 import { StylesContext } from "../../../../Context/StylesContext";
@@ -17,7 +16,13 @@ const WORD_GROW_ANIMATION_S = 0.2; // In seconds
 const WORD_GROW_ANIMATION_MS = WORD_GROW_ANIMATION_S * 1000; // DON'T CHANGE. In milliseconds.
 const WORD_GROW_ANIMATION = `all ${WORD_GROW_ANIMATION_S}s ease-in-out`;
 
-function Column({ initialPosition, columnIndex }) {
+// Interface for props received for Column.
+interface IColumn {
+  initialPosition: number;
+  columnIndex: number;
+}
+
+function Column({ initialPosition, columnIndex }: IColumn) {
   const {
     letters,
     gameWon,
@@ -52,37 +57,37 @@ function Column({ initialPosition, columnIndex }) {
     (longestColumn - columnLetters.length) * -(BOX_HEIGHT / 2);
 
   // Refs
-  const columnRef = useRef(null);
+  const columnRef = useRef<HTMLDivElement>(null);
   const initialYRef = useRef(0);
   const draggedYRef = useRef(startPosition);
-  const arrowUpRef = useRef(null);
-  const arrowDownRef = useRef(null);
-  const currentLetterRef = useRef(null);
+  const arrowUpRef = useRef<SVGSVGElement>(null);
+  const arrowDownRef = useRef<SVGSVGElement>(null);
+  const currentLetterRef = useRef<HTMLDivElement>(null);
   const columnTranslatePositionRef = useRef(startPosition);
 
   // Styles
-  var columnStyle = {
+  const columnStyle = {
     display: `flex`,
     flexDirection: `column`,
     width: `${BOX_HEIGHT}px`,
     position: `relative`,
-  };
+  } as const;
 
-  var arrowStyle = {
+  const arrowStyle = {
     opacity: `0`,
     color: `#5dbafc`,
     height: `${BOX_HEIGHT}px`,
     width: `${ARROW_WIDTH}rem`,
-  };
+  } as const;
 
-  var cellStyle = {
+  const cellStyle = {
     height: `${BOX_HEIGHT}px`,
     width: `${BOX_HEIGHT}px`,
     fontSize: `${LETTER_SIZE}rem`,
-  };
+  } as const;
 
   // Creates the cells containing each letter.
-  const letterBoxes = columnLetters.map((letter, i) => {
+  const letterBoxes = columnLetters.map((letter: string, i: number) => {
     if (i === colPosition) {
       return (
         <div key={i} ref={currentLetterRef} style={cellStyle} className="cell">
@@ -100,7 +105,7 @@ function Column({ initialPosition, columnIndex }) {
 
   // Stores the location of the initial click/tap.
   const handleMouseDown = useCallback(
-    (e) => {
+    (e: MouseEvent | TouchEvent) => {
       // Prevents columns from being dragged if game is over.
       if (gameWon) {
         return;
@@ -109,9 +114,9 @@ function Column({ initialPosition, columnIndex }) {
       setIsDragging(true);
 
       // Stores the initial location where the user tapped or clicked.
-      if (onTouchScreen) {
+      if (e instanceof TouchEvent && onTouchScreen) {
         initialYRef.current = e.touches[0].clientY;
-      } else {
+      } else if (e instanceof MouseEvent) {
         initialYRef.current = e.clientY;
       }
     },
@@ -132,21 +137,26 @@ function Column({ initialPosition, columnIndex }) {
 
   // Moves the column to the appropriate distance dragged.
   const handleDrag = useCallback(
-    (e) => {
+    (e: MouseEvent | TouchEvent) => {
+      if (columnRef.current === null) {
+        return;
+      }
+
       if (!isDragging) {
         return;
       }
 
       // Calculates the difference between the initial location clicked and the distance dragged.
-      if (onTouchScreen) {
+      if (e instanceof TouchEvent && onTouchScreen) {
         const deltaY = initialYRef.current - e.touches[0].clientY;
         initialYRef.current = e.touches[0].clientY;
         draggedYRef.current -= deltaY;
-      } else {
+      } else if (e instanceof MouseEvent) {
         const deltaY = initialYRef.current - e.clientY;
         initialYRef.current = e.clientY;
         draggedYRef.current -= deltaY;
       }
+
       columnRef.current.style.transform = `translateY(${draggedYRef.current}px)`;
     },
     [isDragging, onTouchScreen]
@@ -157,6 +167,10 @@ function Column({ initialPosition, columnIndex }) {
   // If a column is within it's bounds, snap it it it's closest grid position.
   // A timer in a useEffect removes then transition animation.
   const resetColumnAfterMouseUp = useCallback(() => {
+    if (columnRef.current === null) {
+      return;
+    }
+
     if (
       draggedYRef.current < COLUMN_UPPER_LIMIT ||
       draggedYRef.current > COLUMN_LOWER_LIMIT
@@ -198,14 +212,14 @@ function Column({ initialPosition, columnIndex }) {
 
   // Checks is a value is between 2 other values.
   // Returns a boolean.
-  const isBetween = (a, b, value) => {
+  const isBetween = (a: number, b: number, value: number) => {
     // Both a and b are positive.
     if (a >= 0 && b >= 0) {
       if (value >= a && value < b) {
         return true;
       }
     }
-    // BOth a and b are negative.
+    // Both a and b are negative.
     else if (a < 0 && b < 0) {
       if (value <= a && value > b) {
         return true;
@@ -236,12 +250,14 @@ function Column({ initialPosition, columnIndex }) {
 
     setColPosition(newPos);
 
-    var oldWord = currentWord;
-    oldWord = oldWord.split("");
+    // Creates array from the current word.
+    var oldWordArr = currentWord.split("");
 
-    var newWord = oldWord;
-    newWord[columnIndex] = columnLetters[newPos];
-    newWord = newWord.join("");
+    // Creates the new word based on the old word array.
+    var newWordArr = oldWordArr;
+    newWordArr[columnIndex] = columnLetters[newPos];
+
+    var newWord = newWordArr.join("");
 
     setCurrentWord(newWord);
   }, [
@@ -256,15 +272,23 @@ function Column({ initialPosition, columnIndex }) {
   // Sets opacity to 1 for both arrows.
   // Used with event listener.
   const addOpacity = () => {
-    arrowUpRef.current.style.opacity = 1;
-    arrowDownRef.current.style.opacity = 1;
+    if (arrowUpRef.current === null || arrowDownRef.current === null) {
+      return;
+    }
+
+    arrowUpRef.current.style.opacity = "1";
+    arrowDownRef.current.style.opacity = "1";
   };
 
   // Sets opacity to 0 for both arrows.
   // Used with event listener.
   const removeOpacity = () => {
-    arrowUpRef.current.style.opacity = 0;
-    arrowDownRef.current.style.opacity = 0;
+    if (arrowUpRef.current === null || arrowDownRef.current === null) {
+      return;
+    }
+
+    arrowUpRef.current.style.opacity = "0";
+    arrowDownRef.current.style.opacity = "0";
   };
 
   // Runs when isAnimated state changes.
@@ -272,6 +296,10 @@ function Column({ initialPosition, columnIndex }) {
   // clears the animation style.
   useEffect(() => {
     const timeoutId = setTimeout(() => {
+      if (columnRef.current === null) {
+        return;
+      }
+
       setIsAnimated(false);
       columnRef.current.style.transition = ``;
     }, COLUMN_ANIMATION_TIME_MS);
@@ -283,11 +311,19 @@ function Column({ initialPosition, columnIndex }) {
   // Animates the letter stored in the currentLetterRef by growing it then going back to original size.
   // Runs when a valid word is found.
   useEffect(() => {
+    if (currentLetterRef.current === null) {
+      return;
+    }
+
     if (wordIsFound) {
       currentLetterRef.current.style.transform = `scale(1.2)`;
       currentLetterRef.current.style.transition = WORD_GROW_ANIMATION;
 
       const timeoutId = setTimeout(() => {
+        if (currentLetterRef.current === null) {
+          return;
+        }
+
         currentLetterRef.current.style.transform = `scale(1)`;
 
         setWordIsFound(false);
@@ -300,12 +336,19 @@ function Column({ initialPosition, columnIndex }) {
 
   // On initial page load, places column on their starting position.
   useEffect(() => {
+    if (columnRef.current === null) {
+      return;
+    }
     columnRef.current.style.transform = `translateY(${columnTranslatePositionRef.current}px)`;
   }, []);
 
   // Adds event listeners for handling mouse up, mouse down, and dragging.
   useEffect(() => {
     const colRefVar = columnRef.current;
+
+    if (colRefVar === null) {
+      return;
+    }
 
     // Event listeners for mouse actions
     colRefVar.addEventListener("mousedown", handleMouseDown);
@@ -333,6 +376,10 @@ function Column({ initialPosition, columnIndex }) {
   // Event listeners for arrows appearing around letter columns on hover.
   useEffect(() => {
     const colRefVar = columnRef.current;
+
+    if (colRefVar === null) {
+      return;
+    }
 
     colRefVar.addEventListener("mouseover", addOpacity);
     colRefVar.addEventListener("touchstart", addOpacity);
@@ -367,16 +414,3 @@ function Column({ initialPosition, columnIndex }) {
 }
 
 export default Column;
-
-Column.propTypes = {
-  letters: PropTypes.array,
-  initialPosition: PropTypes.number,
-  gameWon: PropTypes.bool,
-  columnIndex: PropTypes.number,
-  wordIsFound: PropTypes.bool,
-  setWordIsFound: PropTypes.func,
-  onTouchScreen: PropTypes.bool,
-  currentWord: PropTypes.string,
-  setCurrentWord: PropTypes.func,
-  longestColumn: PropTypes.number,
-};

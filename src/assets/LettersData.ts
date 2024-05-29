@@ -1,4 +1,21 @@
-const LettersData = {
+type ColumnDataTypes = {
+  letters: string[];
+  initialPosition: number;
+};
+
+type DifficultyTypes = {
+  goalWords: string[];
+  ColumnData: ColumnDataTypes[];
+};
+
+interface LettersDataType {
+  [key: string]: any;
+  EASY: DifficultyTypes;
+  MEDIUM: DifficultyTypes;
+  HARD: DifficultyTypes;
+}
+
+const LettersData: LettersDataType = {
   EASY: {
     goalWords: ["CAT", "BIG", "BAG", "BIT", "BAT"],
     ColumnData: [

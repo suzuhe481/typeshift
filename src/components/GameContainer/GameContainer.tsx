@@ -46,7 +46,7 @@ function GameContainer() {
   return (
     <div className="game-container">
       {gameStart ? <Game /> : <DifficultyMenu />}
-      <WordsList words={goalWords} foundWords={foundWords} />
+      <WordsList />
       <Rules />
     </div>
   );

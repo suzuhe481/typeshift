@@ -23,6 +23,10 @@
     background-color: rgb(235, 235, 235);
 
     text-wrap: nowrap;
+
+    &:hover {
+      background-color: rgb(175, 175, 175);
+    }
   }
 }
 

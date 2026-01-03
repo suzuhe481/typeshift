@@ -114,7 +114,7 @@ function Column({ initialPosition, columnIndex }: IColumn) {
       setIsDragging(true);
 
       // Stores the initial location where the user tapped or clicked.
-      if (e instanceof TouchEvent && onTouchScreen) {
+      if (window.TouchEvent && e instanceof TouchEvent && onTouchScreen) {
         initialYRef.current = e.touches[0].clientY;
       } else if (e instanceof MouseEvent) {
         initialYRef.current = e.clientY;
@@ -147,7 +147,7 @@ function Column({ initialPosition, columnIndex }: IColumn) {
       }
 
       // Calculates the difference between the initial location clicked and the distance dragged.
-      if (e instanceof TouchEvent && onTouchScreen) {
+      if (window.TouchEvent && e instanceof TouchEvent && onTouchScreen) {
         const deltaY = initialYRef.current - e.touches[0].clientY;
         initialYRef.current = e.touches[0].clientY;
         draggedYRef.current -= deltaY;
